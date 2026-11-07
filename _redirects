@@ -1,0 +1,13 @@
+# Global Service Groupe — anciennes adresses (Cloudflare Pages)
+# Les adresses à la racine sont déclarées chez Google (écran de consentement,
+# Play Console) ou imprimées sur des documents : elles doivent toujours répondre.
+/confidentialite         /ecoshop/confidentialite/      301
+/confidentialite/        /ecoshop/confidentialite/      301
+/conditions              /ecoshop/conditions/           301
+/conditions/             /ecoshop/conditions/           301
+/suppression-compte      /ecoshop/suppression-compte/   301
+/suppression-compte/     /ecoshop/suppression-compte/   301
+/document                /ecoshop/document/             301
+/document/               /ecoshop/document/             301
+/certificat              /ecoshop/certificat/           301
+/certificat/             /ecoshop/certificat/           301
