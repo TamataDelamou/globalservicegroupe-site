@@ -71,6 +71,14 @@
       ["Délivré le", date(r.delivre_le)],
       ["Numéro", r.numero],
     ];
+    // EcoShop REG-143 : document remplacé après une correction de l'identité ;
+    // la version en vigueur est indiquée (testé avant « annulé », que la base
+    // garde aussi pour les anciennes pages).
+    if (r.remplace) {
+      var n = r.en_vigueur;
+      var suite = n ? " La version en vigueur est le document n° " + (n.numero || "") + ", délivré le " + date(n.delivre_le) + " à " + (n.titulaire || "") + "." : "";
+      return afficher("Document remplacé", "ko", "Ce document a été remplacé par l'établissement le " + date(r.remplace_le) + "." + suite, lignes);
+    }
     if (r.annule) return afficher("Document annulé", "ko", "Ce document a été annulé par l'établissement le " + date(r.annule_le) + ".", lignes);
     afficher("Document authentique", "ok", "L'établissement a bien enregistré ce document.", lignes);
   }
