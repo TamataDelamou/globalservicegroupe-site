@@ -31,7 +31,7 @@
     <div class="verification" id="verification" data-genre="document">
       <form id="formulaire" novalidate>
         <label for="code">Code de vérification</label>
-        <input id="code" name="code" placeholder="DOC-XXXX-XXXX-XXXX" maxlength="18" autocomplete="off"
+        <input id="code" name="code" placeholder="DOC-XXXX-XXXX-XXXX-XXXX" maxlength="23" autocomplete="off"
                autocapitalize="characters" spellcheck="false" inputmode="text" required>
         <p><button class="bouton" type="submit">Vérifier</button></p>
       </form>
@@ -39,7 +39,7 @@
       <noscript><p class="note">Activez JavaScript dans votre navigateur pour lancer la vérification.</p></noscript>
     </div>
 
-    <p class="note">La réponse indique seulement ce qui est imprimé sur le document : son type et son numéro, le titulaire (prénom et initiale du nom), la classe, l'établissement et la date. Un document annulé par l'établissement est signalé comme tel. La vérification confirme que l'établissement a bien enregistré ce document ; elle ne remplace pas un contrôle d'identité.</p>
+    <p class="note">La réponse n'indique jamais de montant. Pour un document récent (code de quatre groupes de quatre caractères), elle donne son type, l'établissement, la date et son état. Pour un document plus ancien, elle donne ce qui est imprimé dessus : son type et son numéro, le titulaire (prénom et initiale du nom), la classe, l'établissement et la date. Un document annulé par l'établissement est signalé comme tel. La vérification confirme que l'établissement a bien enregistré ce document ; elle ne remplace pas un contrôle d'identité.</p>
   </main>
 
   <footer>

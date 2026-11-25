@@ -1,10 +1,9 @@
 // Global Service Groupe — réglages publics du site (aucun secret ici).
 //
-// La vérification des documents et des certificats interroge directement la
-// base EcoShop avec la clé PUBLIQUE (« publishable ») du projet Supabase : elle
-// ne donne accès qu'aux deux fonctions ouvertes au public, verifier_document
-// et verifier_certificat, qui ne renvoient que ce qui est imprimé sur le
-// document. Au passage en production, remplacer ces deux valeurs par celles
+// Les documents sont vérifiés par la fonction Edge verifier_document du projet
+// (aucune clé envoyée) ; les certificats, par la fonction de base publique
+// verifier_certificat, avec la clé PUBLIQUE (« publishable ») du projet
+// Supabase. Au passage en production, remplacer ces deux valeurs par celles
 // du projet de production (Supabase › Project Settings › API Keys).
 window.GSG_CONFIG = {
   ecoshop: {
