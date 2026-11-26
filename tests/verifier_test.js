@@ -28,7 +28,7 @@ async function charger({ genre = "document", recherche, reponse }) {
   const appels = [];
   const contexte = {
     document: { getElementById: (id) => ids[id] ?? null, createElement: () => element() },
-    window: { GSG_CONFIG: { ecoshop: { supabaseUrl: "https://projet.supabase.co/", clePublique: "cle_publique" } } },
+    window: { GSG_CONFIG: { ecoshop: { supabaseUrl: "https://projet.supabase.co/" } } },
     location: { search: recherche },
     history: { replaceState() {} },
     URLSearchParams,
@@ -80,8 +80,12 @@ Deno.test("inconnu, en cours de délivrance, trop d'essais, code mal formé", as
   ok(malForme.affiche.includes("Code invalide"));
 });
 
-Deno.test("certificat : toujours la fonction de base publique, avec la clé publique", async () => {
-  const { appels } = await charger({ genre: "certificat", recherche: "?code=GSG-2345-6789-ABCD", reponse: { status: 200, corps: { inconnu: true } } });
-  egal(appels[0].url, "https://projet.supabase.co/rest/v1/rpc/verifier_certificat");
-  egal(appels[0].options.headers.apikey, "cle_publique");
+Deno.test("certificat (REG-220) : fonction Edge verifier_certificat en JSON, sans clé ; 429 et inconnu affichés", async () => {
+  const { appels, affiche } = await charger({ genre: "certificat", recherche: "?code=GSG-2345-6789-ABCD", reponse: { status: 200, corps: { valide: false, inconnu: true } } });
+  egal(appels.length, 1);
+  egal(appels[0].url, "https://projet.supabase.co/functions/v1/verifier_certificat?format=json&code=GSG-2345-6789-ABCD");
+  egal(appels[0].options.method, "GET");
+  egal(appels[0].options.headers, undefined);
+  ok(affiche.includes("Certificat introuvable"));
+  ok((await charger({ genre: "certificat", recherche: "?code=GSG-2345-6789-ABCD", reponse: { status: 429, corps: {} } })).affiche.includes("Trop d'essais"));
 });
