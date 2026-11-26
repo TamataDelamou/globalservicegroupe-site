@@ -3,11 +3,11 @@
 // signés, ?jeton=…, puis affiche le résultat. Tout texte reçu est inséré avec
 // textContent : jamais interprété comme du HTML.
 //
-// Documents (EcoShop REG-216) : la page interroge la fonction Edge
-// verifier_document (?format=json), qui limite le nombre d'essais par adresse
-// et répond de la même façon à un code inconnu et à un code mal formé. Simple
-// requête GET, sans en-tête ajouté : aucun échange CORS préalable.
-// Certificats : fonction de base publique verifier_certificat, comme avant.
+// Documents (EcoShop REG-216) et certificats (REG-220) : la page interroge la
+// fonction Edge verifier_document ou verifier_certificat (?format=json), qui
+// limite le nombre d'essais par adresse et répond de la même façon à un code
+// inconnu et à un code mal formé. Simple requête GET, sans clé ni en-tête
+// ajouté : aucun échange CORS préalable.
 (function () {
   "use strict";
   var racine = document.getElementById("verification");
@@ -123,19 +123,11 @@
 
   function requete(code, jeton) {
     var base = config.supabaseUrl.replace(/\/+$/, "");
-    if (genre === "document") {
-      var params = new URLSearchParams({ format: "json" });
-      if (jeton) params.set("jeton", jeton); else params.set("code", code);
-      return fetch(base + "/functions/v1/verifier_document?" + params.toString(), {
-        method: "GET",
-        cache: "no-store",
-        referrerPolicy: "no-referrer",
-      });
-    }
-    return fetch(base + "/rest/v1/rpc/verifier_certificat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", apikey: config.clePublique },
-      body: JSON.stringify({ p_code: code }),
+    var params = new URLSearchParams({ format: "json" });
+    if (jeton) params.set("jeton", jeton); else params.set("code", code);
+    var fonction = genre === "document" ? "verifier_document" : "verifier_certificat";
+    return fetch(base + "/functions/v1/" + fonction + "?" + params.toString(), {
+      method: "GET",
       cache: "no-store",
       referrerPolicy: "no-referrer",
     });

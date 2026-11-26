@@ -1,13 +1,11 @@
 // Global Service Groupe — réglages publics du site (aucun secret ici).
 //
-// Les documents sont vérifiés par la fonction Edge verifier_document du projet
-// (aucune clé envoyée) ; les certificats, par la fonction de base publique
-// verifier_certificat, avec la clé PUBLIQUE (« publishable ») du projet
-// Supabase. Au passage en production, remplacer ces deux valeurs par celles
-// du projet de production (Supabase › Project Settings › API Keys).
+// Les documents et les certificats sont vérifiés par les fonctions Edge
+// verifier_document et verifier_certificat du projet (aucune clé envoyée,
+// EcoShop REG-216 et REG-220). Au passage en production, remplacer l'adresse
+// par celle du projet de production (Supabase › Project Settings › API).
 window.GSG_CONFIG = {
   ecoshop: {
     supabaseUrl: "https://nlydvaszgdtjohneggqt.supabase.co",
-    clePublique: "sb_publishable_1K7s4ewnoUW6I7axDu1t_A_BE18Mkwl",
   },
 };

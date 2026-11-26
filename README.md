@@ -35,13 +35,14 @@ renvoient ici.
   Elle limite le nombre d'essais par adresse et par minute (réponse 429),
   et répond de la même façon à un code inconnu et à un code mal formé. La
   fonction de base `verifier_document` n'est plus ouverte au public.
-- **Certificats** : la page interroge la fonction de base publique
-  `verifier_certificat` avec la **clé publique** du projet.
+- **Certificats** : de même par la fonction Edge
+  `/functions/v1/verifier_certificat?format=json&code=…` (EcoShop REG-220),
+  avec la même limite d'essais. Aucune clé n'est envoyée.
 
-L'adresse du projet et la clé publique sont réglées dans `assets/config.js`.
+L'adresse du projet est réglée dans `assets/config.js`.
 
-**Au passage en production** : remplacer l'adresse et la clé publique du
-projet dans `assets/config.js`.
+**Au passage en production** : remplacer l'adresse du projet dans
+`assets/config.js`.
 
 ## Avant de publier
 
