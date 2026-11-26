@@ -26,10 +26,19 @@ l'accueil.
 ## Vérification des documents
 
 Supabase ne sert pas de page HTML depuis une fonction (il la transforme en
-texte brut). Le QR code ouvre donc `/ecoshop/document/?code=…` ; la page
-interroge la fonction de base **publique** `verifier_document` (ou
-`verifier_certificat`) avec la **clé publique** du projet, réglée dans
-`assets/config.js`. Les anciennes adresses des fonctions renvoient ici.
+texte brut). Le QR code ouvre donc `/ecoshop/document/?code=…` (et, pour
+un document signé, `&jeton=…`) ; les anciennes adresses des fonctions
+renvoient ici.
+
+- **Documents** : la page appelle la fonction Edge
+  `/functions/v1/verifier_document?format=json&code=…` (EcoShop REG-216).
+  Elle limite le nombre d'essais par adresse et par minute (réponse 429),
+  et répond de la même façon à un code inconnu et à un code mal formé. La
+  fonction de base `verifier_document` n'est plus ouverte au public.
+- **Certificats** : la page interroge la fonction de base publique
+  `verifier_certificat` avec la **clé publique** du projet.
+
+L'adresse du projet et la clé publique sont réglées dans `assets/config.js`.
 
 **Au passage en production** : remplacer l'adresse et la clé publique du
 projet dans `assets/config.js`.
